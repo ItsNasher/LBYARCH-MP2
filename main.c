@@ -29,7 +29,6 @@ int compute_acceleration_c(float Vi, float Vf, float T) {
     float acceleration = delta_v_ms / T;
     return (int)roundf(acceleration);
 }
-
 void generate_random_input(float *matrix, int Y) {
     srand(time(NULL));
     for (int i = 0; i < Y; i++) {
@@ -44,8 +43,7 @@ int main() {
     int num_sizes = sizeof(Y_sizes) / sizeof(Y_sizes[0]);
     const int NUM_RUNS = 30;
 
-    printf("=================================================================\n");
-    printf("?? x86-64 SIMD Acceleration Calculator and Performance Tester ??\n");
+    printf("Ethan Dela Cruz, Marc Dumaran\n");
     printf("=================================================================\n");
 
     int Y_sample = 3;
@@ -55,48 +53,23 @@ int main() {
         30.0f, 160.7f, 7.8f
     };
     int sample_output[3];
-    int expected_output[3];
-
-    for (int i = 0; i < Y_sample; i++) {
-        expected_output[i] = compute_acceleration_c(
-            sample_input[i * 3 + 0],
-            sample_input[i * 3 + 1],
-            sample_input[i * 3 + 2]
-        );
-    }
 
     compute_acceleration_asm(sample_input, sample_output, Y_sample);
-
-    printf("\n## 1. Sample Input and Output (Correctness Check)\n");
+    printf("\n1. Sample Input and Output\n");
     printf("-------------------------------------------------\n");
-    printf("?? Input: Matrix Rows (Vi, Vf in KM/H, T in seconds)\n");
-    printf("   Number of Rows (Y): %d\n", Y_sample);
+    printf("Input Vi, Vf, T \t| Acceleration m/s^2\n"); 
+    printf("-------------------------------------------------\n");
+    
     for (int i = 0; i < Y_sample; i++) {
-        printf("   Car %d: %.1f, %.1f, %.1f\n",
-            i + 1,
+        printf("%.1f, %.1f, %.1f\t| %d\n",
             sample_input[i * 3 + 0],
             sample_input[i * 3 + 1],
-            sample_input[i * 3 + 2]
+            sample_input[i * 3 + 2],
+            sample_output[i]
         );
     }
-
-    printf("\n?? Output: Integer Acceleration (m/s^2)\n");
-    int correct_count = 0;
-    for (int i = 0; i < Y_sample; i++) {
-        char *status = (sample_output[i] == expected_output[i]) ? "? Correct" : "? Error";
-        printf("   Acceleration Car %d: %d (Expected: %d) -> %s\n",
-            i + 1,
-            sample_output[i],
-            expected_output[i],
-            status
-        );
-        if (sample_output[i] == expected_output[i]) {
-            correct_count++;
-        }
-    }
-    printf("\nCorrectness Status: %d/%d entries correct.\n", correct_count, Y_sample);
-
-    printf("\n## 2. Performance Timing (Average of %d runs)\n", NUM_RUNS);
+    printf("-------------------------------------------------\n");
+    printf("\n2. Performance Timing Avg of %d runs\n", NUM_RUNS);
     printf("-------------------------------------------------\n");
     printf("Size (Y)\tAvg Time (ms)\n");
     printf("-------------------------------------------------\n");
