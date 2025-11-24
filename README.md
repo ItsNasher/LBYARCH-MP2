@@ -9,6 +9,9 @@ DUMARAN, MARC IAN ALVAR
 3. `gcc main.c acceleration.o -o acceleration_test -Wall -O3 -lm -lrt -no-pie`
 4. `./acceleration_test`
 
+# Output
+<img width="1576" height="1098" alt="image" src="https://github.com/user-attachments/assets/c20c36a1-3aaf-436f-9859-e41dca838237" />
+
 # LBYARCH-MP2
 A car's peformance is usually measured using an acceleration test with a 1KM distance. Some cars are measured from a cold start (they start at 0KM/H), some are tested from a hot start (the car is running at a stable speed and then accelerates).
 
