@@ -39,9 +39,9 @@ void generate_random_input(float *matrix, int Y) {
 }
 
 int main() {
-    int Y_sizes[] = {10, 100, 1000, 10000};
-    int num_sizes = sizeof(Y_sizes) / sizeof(Y_sizes[0]);
-    const int NUM_RUNS = 30;
+    int size[] = {10, 100, 1000, 10000};
+    int num_sizes = sizeof(size) / sizeof(size[0]);
+    const int num_runs = 30;
 
     printf("Ethan Dela Cruz, Marc Dumaran\n");
     printf("=================================================================\n");
@@ -57,11 +57,11 @@ int main() {
     compute_acceleration_asm(sample_input, sample_output, Y_sample);
     printf("\n1. Sample Input and Output\n");
     printf("-------------------------------------------------\n");
-    printf("Input Vi, Vf, T \t| Acceleration m/s^2\n"); 
+    printf("Input           | Acceleration      \n");
     printf("-------------------------------------------------\n");
     
     for (int i = 0; i < Y_sample; i++) {
-        printf("%.1f, %.1f, %.1f\t| %d\n",
+        printf("%5.1f, %5.1f, %5.1f | %d\n",
             sample_input[i * 3 + 0],
             sample_input[i * 3 + 1],
             sample_input[i * 3 + 2],
@@ -69,13 +69,13 @@ int main() {
         );
     }
     printf("-------------------------------------------------\n");
-    printf("\n2. Performance Timing Avg of %d runs\n", NUM_RUNS);
+    printf("\n2. Performance Timing Avg of %d runs\n", num_runs);
     printf("-------------------------------------------------\n");
     printf("Size (Y)\tAvg Time (ms)\n");
     printf("-------------------------------------------------\n");
 
     for (int j = 0; j < num_sizes; j++) {
-        int Y = Y_sizes[j];
+        int Y = size[j];
         float *input_matrix = (float *)malloc(Y * 3 * sizeof(float));
         int *output_array = (int *)malloc(Y * sizeof(int));
 
@@ -90,13 +90,13 @@ int main() {
 
         double total_time_ms = 0.0;
 
-        for (int k = 0; k < NUM_RUNS; k++) {
+        for (int k = 0; k < num_runs; k++) {
             start_timer();
             compute_acceleration_asm(input_matrix, output_array, Y);
             total_time_ms += stop_timer();
         }
 
-        double average_time_ms = total_time_ms / NUM_RUNS;
+        double average_time_ms = total_time_ms / num_runs;
         printf("%d\t\t%.4f\n", Y, average_time_ms);
 
         free(input_matrix);
