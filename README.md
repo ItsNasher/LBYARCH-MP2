@@ -3,6 +3,7 @@ DELA CRUZ, ETHAN IAGO DOROPAN
 
 DUMARAN, MARC IAN ALVAR
 # Video Link: 
+https://www.canva.com/design/DAG5n0DT7t8/sN5mIpz0o-RQpZuyK68Tfw/watch?utm_content=DAG5n0DT7t8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0602d3e601
 # How to Run
 1. Make sure nasm and gcc commands are installed.
 2. `nasm -f elf64 acceleration.asm -o acceleration.o`
