@@ -1,3 +1,6 @@
+# LBYARCH S18 A
+DELA CRUZ, ETHAN IAGO DOROPAN
+DUMARAN, MARC IAN ALVARDUMARAN, MARC IAN ALVAR 
 # Video Link: 
 # How to Run
 1. Make sure nasm and gcc commands are installed.
